@@ -1,12 +1,29 @@
 ﻿namespace LibraryManagement
 {
-    public class SoftCopy : Book
+    public class Softcopy : Book
     {
-        public int Version { get; set; }
+        private int version;
 
-        public SoftCopy()
+        public Softcopy()
         {
-            Type = "SoftCopy";
+
+        }
+
+        public Softcopy(string name, string author, string genre, int version, string type) : base(name, author, genre, type)
+        {
+            base.setType("SoftCopy");
+            this.version = version;
+
+        }
+
+        public int getVersion()
+        {
+            return version;
+        }
+
+        public void setVersion(int version)
+        {
+            this.version = version;
         }
     }
 }
