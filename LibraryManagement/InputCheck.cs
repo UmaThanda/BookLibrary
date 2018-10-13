@@ -31,32 +31,23 @@ namespace LibraryManagement
 
         public static int CheckInteger(string option, int max)
         {
-           // int output = 0;
- 
             try
             {
                 Console.WriteLine(option);
                 string input = Console.ReadLine();
                 int output = Convert.ToInt32(input);
-               // if (int.TryParse(input, out output))
-               // {
-                    if (output >= 1 && output <= max)
-                        return output;
-                    
-               // }
+                if (output >= 1 && output <= max)
+                    return output;
+                else
+                    Console.WriteLine("Enter a valid input");
             }
             catch
             {
                 Console.WriteLine("Enter a valid input");
                 
             }
-
             return CheckInteger(option, max);
         }
-            
-       
-
-
-
+    
     }
 }
