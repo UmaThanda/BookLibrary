@@ -81,6 +81,24 @@ namespace LibraryManagement
 
                 }
         }
+        public void writeAllBooks(List<Book> books)
+        {
+            File.WriteAllText("BookData.txt", String.Empty);
+            foreach(var book in books)
+                if (book.getType().Equals("HardCopy"))
+                {
+                    Hardcopy  b = (Hardcopy) book;
+                    string bookData = b.getName() + ":" + b.getAuthor() + ":" + b.getGenre() + ":" + b.getType() + ":" + b.getYear();
+                    File.AppendAllText("BookData.txt", bookData + Environment.NewLine);
+                }else
+                {
+                    Softcopy b = (Softcopy)book;
+                    string bookData = b.getName() + ":" + b.getAuthor() + ":" + b.getGenre() + ":" + b.getType() + ":" + b.getVersion();
+                    File.AppendAllText("BookData.txt", bookData + Environment.NewLine);
+
+                }
+        }
+
 
 
     }
