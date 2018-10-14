@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LibraryManagement
 {
     class InputCheck
     {
-
         public static string checkRole(string option)
         {
             try
@@ -24,10 +19,8 @@ namespace LibraryManagement
             {
                 Console.WriteLine("Enter either u or a");
             }
-
             return checkRole(option);
         }
-
 
         public static int CheckInteger(string option, int max)
         {
@@ -44,10 +37,8 @@ namespace LibraryManagement
             catch
             {
                 Console.WriteLine("Enter a valid input");
-                
             }
             return CheckInteger(option, max);
         }
-    
     }
 }

@@ -49,6 +49,8 @@ namespace LibraryManagement
                     LibraryMethods.findAllBooks();
                     break;
                 default:
+                    Console.WriteLine("Thank you for using the Library!!!");
+                    Console.ReadLine();
                     return;
             }
             user();
@@ -83,9 +85,11 @@ namespace LibraryManagement
                     LibraryMethods.addBook();
                     break;
                 case 8:
-                  // LibraryMethods.deleteBook();
+                    LibraryMethods.deleteBook();
                     break;
                 default:
+                    Console.WriteLine("Thank you for using the Library!!!");
+                    Console.ReadLine();
                     return;
             }
             admin();
@@ -96,7 +100,7 @@ namespace LibraryManagement
 
         public static void userMenu()
         {
-            Console.WriteLine("1.  Find book by keyword");
+            Console.WriteLine("1.  Find book by book name");
             Console.WriteLine("2.  Find book by author");
             Console.WriteLine("3.  Find book by genre");
             Console.WriteLine("4.  Find book by type");
@@ -108,7 +112,7 @@ namespace LibraryManagement
 
         public static void adminMenu()
         {
-            Console.WriteLine("1.  Find book by keyword");
+            Console.WriteLine("1.  Find book by book name");
             Console.WriteLine("2.  Find book by author");
             Console.WriteLine("3.  Find book by genre");
             Console.WriteLine("4.  Find book by type");
