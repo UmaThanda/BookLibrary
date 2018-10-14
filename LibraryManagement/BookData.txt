@@ -1,2 +1,0 @@
-book3:author3:genre3:hardcopy
-book4:author4:genre4:softcopy
