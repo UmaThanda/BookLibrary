@@ -47,7 +47,13 @@ namespace LibraryManagement
                         break;
                     }
 
+                }
+                
+                
+
+
                 else
+
                 {
                     Console.WriteLine("Sorry.. Look for another author");
                     break;
@@ -179,14 +185,30 @@ namespace LibraryManagement
             Console.ReadLine();
         }
 
-        public static void deleteBook()
+
+
+        public static void editBook()
         {
+   
             var externalFile = new ExternalFile();
             List<Book> books = ExternalFile.getData();
 
             findAllBooks();
             Console.WriteLine("Please enter a book number");
             var bookNum = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Details of the book you chose");
+            Console.WriteLine(books[bookNum - 1].getName() + ":" + books[bookNum - 1].getAuthor() + ":" + books[bookNum - 1].getGenre() + ":" + books[bookNum - 1].getType());
+
+            Console.WriteLine("Enter new Book Author");
+            string editAuthor = Console.ReadLine();
+            books[bookNum - 1].setAuthor(editAuthor);
+
+            externalFile.writeAllBooks(books);
+        }
+
+
+       
        
             books.RemoveAt(bookNum-1);
             
@@ -198,6 +220,8 @@ namespace LibraryManagement
 
     }
 }
+
+   
 
     
 
