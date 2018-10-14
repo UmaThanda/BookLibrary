@@ -175,13 +175,26 @@ namespace LibraryManagement
                 externalFile.writeData(book);
             }
 
-
-
             Console.WriteLine("Book has been Added");
             Console.ReadLine();
         }
 
-        
+        public static void deleteBook()
+        {
+            var externalFile = new ExternalFile();
+            List<Book> books = ExternalFile.getData();
+
+            findAllBooks();
+            Console.WriteLine("Please enter a book number");
+            var bookNum = Convert.ToInt32(Console.ReadLine());
+       
+            books.RemoveAt(bookNum-1);
+            
+
+            externalFile.writeAllBooks(books);
+
+        }
+
 
     }
 }
