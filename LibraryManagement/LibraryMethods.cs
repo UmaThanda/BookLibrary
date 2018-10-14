@@ -181,22 +181,22 @@ namespace LibraryManagement
                 externalFile.writeData(book);
             }
 
-
-
             Console.WriteLine("Book has been Added");
             Console.ReadLine();
         }
 
 
+
         public static void editBook()
         {
-
+   
             var externalFile = new ExternalFile();
             List<Book> books = ExternalFile.getData();
 
             findAllBooks();
             Console.WriteLine("Please enter a book number");
             var bookNum = Convert.ToInt32(Console.ReadLine());
+
             Console.WriteLine("Details of the book you chose");
             Console.WriteLine(books[bookNum - 1].getName() + ":" + books[bookNum - 1].getAuthor() + ":" + books[bookNum - 1].getGenre() + ":" + books[bookNum - 1].getType());
 
@@ -208,7 +208,15 @@ namespace LibraryManagement
         }
 
 
-        
+       
+       
+            books.RemoveAt(bookNum-1);
+            
+
+            externalFile.writeAllBooks(books);
+
+        }
+
 
     }
 }
