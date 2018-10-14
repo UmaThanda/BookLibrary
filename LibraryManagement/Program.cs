@@ -30,7 +30,7 @@ namespace LibraryManagement
         public static void user()
         {
             userMenu();
-            int input = InputCheck.CheckInteger("Please select a number and enter", 6);
+            int input = InputCheck.CheckInteger("Please enter a number from the menu: ", 6);
             switch (input)
             {
                 case 1:
@@ -46,11 +46,12 @@ namespace LibraryManagement
                        LibraryMethods.findByType();
                     break;
                 case 5:
+                    Console.WriteLine();
                     LibraryMethods.findAllBooks();
                     break;
                 default:
                     Console.WriteLine("Thank you for using the Library!!!");
-                    Console.ReadLine();
+                    Console.WriteLine();
                     return;
             }
             user();
@@ -60,7 +61,7 @@ namespace LibraryManagement
         {
             Book b = new Book();
             adminMenu();
-            int input = InputCheck.CheckInteger("Please select a number and enter", 9);
+            int input = InputCheck.CheckInteger("Please enter a number from the menu: ", 9);
             switch (input)
             {
                 case 1:
@@ -89,7 +90,6 @@ namespace LibraryManagement
                     break;
                 default:
                     Console.WriteLine("Thank you for using the Library!!!");
-                    Console.ReadLine();
                     return;
             }
             admin();
@@ -100,6 +100,8 @@ namespace LibraryManagement
 
         public static void userMenu()
         {
+            Console.WriteLine("\nUser Menu");
+            Console.WriteLine("**********");
             Console.WriteLine("1.  Find book by book name");
             Console.WriteLine("2.  Find book by author");
             Console.WriteLine("3.  Find book by genre");
@@ -112,6 +114,8 @@ namespace LibraryManagement
 
         public static void adminMenu()
         {
+            Console.WriteLine("\nAdmin Menu");
+            Console.WriteLine("**********");
             Console.WriteLine("1.  Find book by book name");
             Console.WriteLine("2.  Find book by author");
             Console.WriteLine("3.  Find book by genre");
