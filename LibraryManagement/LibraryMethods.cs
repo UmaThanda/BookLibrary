@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -18,14 +18,14 @@ namespace LibraryManagement
 
             foreach (Book book in books)
             {
-                               
-                    if (book.getName().Equals(keyword))
-                    {
-                        Console.WriteLine(book.getName() + ":" + book.getAuthor() + ":" + book.getGenre() + ":" + book.getType());
-                        break;
-                    }
 
-                
+                if (book.getName().Equals(keyword))
+                {
+                    Console.WriteLine(book.getName() + ":" + book.getAuthor() + ":" + book.getGenre() + ":" + book.getType());
+                    break;
+                }
+
+
                 else
                 {
                     Console.WriteLine("Sorry.. Try a different keyword");
@@ -41,11 +41,11 @@ namespace LibraryManagement
             List<Book> books = ExternalFile.getData();
             foreach (Book book in books)
             {
-                    if (book.getAuthor() == keyword)
-                    {
-                        Console.WriteLine("Books written by " + book.getAuthor() + " " + book.getName() + ":" + book.getAuthor() + ":" + book.getGenre() + ":" + book.getType());
-                        break;
-                    }
+                if (book.getAuthor() == keyword)
+                {
+                    Console.WriteLine("Books written by " + book.getAuthor() + " " + book.getName() + ":" + book.getAuthor() + ":" + book.getGenre() + ":" + book.getType());
+                    break;
+                }
 
                 }
                 
@@ -71,12 +71,12 @@ namespace LibraryManagement
 
             foreach (Book book in books)
             {
-                    if (book.getGenre().Equals(keyword))
-                    {
-                        Console.WriteLine(book.getName() + book.getAuthor() + book.getGenre() + book.getType());
+                if (book.getGenre().Equals(keyword))
+                {
+                    Console.WriteLine(book.getName() + book.getAuthor() + book.getGenre() + book.getType());
                     break;
-                    }
-                
+                }
+
                 else
                 {
                     Console.WriteLine("Sorry.. Look for a different Genre");
@@ -93,7 +93,7 @@ namespace LibraryManagement
             if (string.Equals(keyword, "hardcopy", StringComparison.OrdinalIgnoreCase) ||
                 (string.Equals(keyword, "softcopy", StringComparison.OrdinalIgnoreCase)))
             {
-                Console.WriteLine("Here is the list for type - "+ keyword);
+                Console.WriteLine("Here is the list for type - " + keyword);
 
                 foreach (Book book in books)
                 {
@@ -111,8 +111,8 @@ namespace LibraryManagement
                 //break;
 
             }
-            }
-        
+        }
+
 
 
         public static void findAllBooks()
@@ -122,24 +122,29 @@ namespace LibraryManagement
 
             for (int i = 0; i < books.Count; i++)
             {
-
-                Console.WriteLine(i + 1 + ")." + books[i].getName() + ":" + books[i].getAuthor() + ":" + books[i].getGenre() + ":" + books[i].getType());
+                if(books[i].GetType().ToString().Equals("LibraryManagement.Hardcopy", StringComparison.OrdinalIgnoreCase))
+                {
+                    var hardcopy = (Hardcopy)books[i];
+                    Console.WriteLine(i + 1 + "). " + books[i].getName() + ":" + books[i].getAuthor() + ":" + books[i].getGenre() + ":" + books[i].getType() + ":" + hardcopy.getYear());
+                }
+                else
+                {
+                    var softcopy = (Softcopy)books[i];
+                    Console.WriteLine(i + 1 + "). " + books[i].getName() + ":" + books[i].getAuthor() + ":" + books[i].getGenre() + ":" + books[i].getType() + ":" + softcopy.getVersion());
+                }
             }
+            Console.ReadLine();
         }
-
-
 
         public static void addBook()
         {
-
-
             var externalFile = new ExternalFile();
 
-            Console.WriteLine("Enter Book Type");
+            Console.WriteLine("Enter Book Type - hardcopy or softcopy");
             string givenType = Console.ReadLine();
             //if (givenType.Equals("HardCopy"))
-            if(string.Equals(givenType, "hardcopy", StringComparison.OrdinalIgnoreCase))
-                
+            if (string.Equals(givenType, "hardcopy", StringComparison.OrdinalIgnoreCase))
+
             {
                 Console.WriteLine("Enter Book Name");
                 string givenName = Console.ReadLine();
@@ -151,7 +156,7 @@ namespace LibraryManagement
                 string givenGenre = Console.ReadLine();
 
                 Console.WriteLine("Enter Year");
-                var givenYear = Convert.ToInt32(Console.ReadLine());
+                var givenYear = Console.ReadLine();
 
                 Hardcopy book = new Hardcopy(givenName, givenAuthor, givenGenre, givenYear, givenType);
                 externalFile.writeData(book);
@@ -159,8 +164,8 @@ namespace LibraryManagement
 
 
             }
-           // else if (givenType.Equals("SoftCopy"))
-          else if (string.Equals(givenType, "softcopy", StringComparison.OrdinalIgnoreCase))
+            // else if (givenType.Equals("SoftCopy"))
+            else if (string.Equals(givenType, "softcopy", StringComparison.OrdinalIgnoreCase))
             {
 
                 Console.WriteLine("Enter Book Name");
@@ -173,7 +178,7 @@ namespace LibraryManagement
                 string givenGenre = Console.ReadLine();
 
                 Console.WriteLine("Enter Version");
-                var givenVersion = Convert.ToInt32(Console.ReadLine());
+                var givenVersion = Console.ReadLine();
 
                 Softcopy book = new Softcopy(givenName, givenAuthor, givenGenre, givenVersion, givenType);
 
@@ -181,23 +186,23 @@ namespace LibraryManagement
                 externalFile.writeData(book);
             }
 
+
+
             Console.WriteLine("Book has been Added");
             Console.ReadLine();
         }
 
-
-
         public static void editBook()
         {
-   
             var externalFile = new ExternalFile();
             List<Book> books = ExternalFile.getData();
 
             findAllBooks();
             Console.WriteLine("Please enter a book number");
             var bookNum = Convert.ToInt32(Console.ReadLine());
+            var bookNum = InputCheck.CheckInteger("Please enter a book number : ", books.Count);
 
-            Console.WriteLine("Details of the book you chose");
+            Console.WriteLine("Details of the book you choose");
             Console.WriteLine(books[bookNum - 1].getName() + ":" + books[bookNum - 1].getAuthor() + ":" + books[bookNum - 1].getGenre() + ":" + books[bookNum - 1].getType());
 
             Console.WriteLine("Enter new Book Author");
@@ -207,21 +212,20 @@ namespace LibraryManagement
             externalFile.writeAllBooks(books);
         }
 
+        public static void deleteBook()
+        {
+            var externalFile = new ExternalFile();
+            List<Book> books = ExternalFile.getData();
 
-       
-       
-            books.RemoveAt(bookNum-1);
-            
+            findAllBooks();
+            Console.WriteLine("Please enter a book number");
+            var bookNum = Convert.ToInt32(Console.ReadLine());
+            books.RemoveAt(bookNum - 1);
+          
+            Console.WriteLine("Details of the book you choose");
+            Console.WriteLine(books[bookNum - 1].getName() + ":" + books[bookNum - 1].getAuthor() + ":" + books[bookNum - 1].getGenre() + ":" + books[bookNum - 1].getType());
 
             externalFile.writeAllBooks(books);
-
         }
-
-
     }
 }
-
-   
-
-    
-

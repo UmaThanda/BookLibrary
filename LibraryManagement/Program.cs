@@ -77,13 +77,13 @@ namespace LibraryManagement
                     LibraryMethods.findAllBooks();
                     break;
                 case 6:
-                    //LibraryMethods.editBook();
+                    LibraryMethods.editBook();
                     break;
                 case 7:
                     LibraryMethods.addBook();
                     break;
                 case 8:
-                   //LibraryMethods.deleteBook();
+                  // LibraryMethods.deleteBook();
                     break;
                 default:
                     return;
