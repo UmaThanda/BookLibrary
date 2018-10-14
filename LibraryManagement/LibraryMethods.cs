@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace LibraryManagement
 {
@@ -13,25 +12,21 @@ namespace LibraryManagement
         public static void findByName()
         {
             List<Book> books = ExternalFile.getData();
-            Console.WriteLine("enter keyword");
-            string keyword = Console.ReadLine();
+            Console.WriteLine("enter book name");
+            string bookName = Console.ReadLine();
 
             foreach (Book book in books)
             {
 
-                if (book.getName().Equals(keyword))
+                if (book.getName().Equals(bookName, StringComparison.OrdinalIgnoreCase))
                 {
                     Console.WriteLine(book.getName() + ":" + book.getAuthor() + ":" + book.getGenre() + ":" + book.getType());
-                    break;
-                }
-
-
-                else
-                {
-                    Console.WriteLine("Sorry.. Try a different keyword");
-                    break;
+                    Console.ReadLine();
+                    return;
                 }
             }
+            Console.WriteLine("Sorry.. Try a different book name");
+            Console.ReadLine();
         }
 
         public static void findByAuthor()
@@ -41,20 +36,16 @@ namespace LibraryManagement
             List<Book> books = ExternalFile.getData();
             foreach (Book book in books)
             {
-                if (book.getAuthor() == keyword)
+                if (book.getAuthor().Equals(keyword, StringComparison.OrdinalIgnoreCase))
                 {
                     Console.WriteLine("Books written by " + book.getAuthor() + " " + book.getName() + ":" + book.getAuthor() + ":" + book.getGenre() + ":" + book.getType());
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine("Sorry.. Look for another author");
-                    break;
+                    Console.ReadLine();
+                    return;
                 }
             }
+            Console.WriteLine("Sorry.. Look for another author");
+            Console.ReadLine();
         }
-
-
 
         public static void findByGenre()
         {
@@ -64,18 +55,15 @@ namespace LibraryManagement
 
             foreach (Book book in books)
             {
-                if (book.getGenre().Equals(keyword))
+                if (book.getGenre().Equals(keyword, StringComparison.OrdinalIgnoreCase))
                 {
-                    Console.WriteLine(book.getName() + book.getAuthor() + book.getGenre() + book.getType());
-                    break;
-                }
-
-                else
-                {
-                    Console.WriteLine("Sorry.. Look for a different Genre");
-                    break;
+                    Console.WriteLine(book.getName() + ":" + book.getAuthor() + ":" + book.getGenre() + ":" + book.getType());
+                    Console.ReadLine();
+                    return;
                 }
             }
+            Console.WriteLine("Sorry.. Look for a different Genre");
+            Console.ReadLine();
         }
 
         public static void findByType()
@@ -93,20 +81,15 @@ namespace LibraryManagement
                     if (string.Equals(keyword, book.getType(), StringComparison.OrdinalIgnoreCase))
                     {
                         Console.WriteLine(book.getName() + ": " + book.getType());
-                        //break;
                     }
                 }
-
             }
             else
             {
                 Console.WriteLine("The type you are looking for is unavailable");
-                //break;
-
             }
+            Console.ReadLine();
         }
-
-
 
         public static void findAllBooks()
         {
@@ -115,18 +98,18 @@ namespace LibraryManagement
 
             for (int i = 0; i < books.Count; i++)
             {
-                if(books[i].GetType().ToString().Equals("LibraryManagement.Hardcopy", StringComparison.OrdinalIgnoreCase))
+                if (books[i].GetType().ToString().Equals("LibraryManagement.Hardcopy", StringComparison.OrdinalIgnoreCase))
                 {
                     var hardcopy = (Hardcopy)books[i];
-                    Console.WriteLine(i + 1 + "). " + books[i].getName() + ":" + books[i].getAuthor() + ":" + books[i].getGenre() + ":" + books[i].getType() + ":" + hardcopy.getYear());
+                    Console.WriteLine(i + 1 + ") " + books[i].getName() + ":" + books[i].getAuthor() + ":" + books[i].getGenre() + ":" + books[i].getType() + ":" + hardcopy.getYear());
                 }
                 else
                 {
                     var softcopy = (Softcopy)books[i];
-                    Console.WriteLine(i + 1 + "). " + books[i].getName() + ":" + books[i].getAuthor() + ":" + books[i].getGenre() + ":" + books[i].getType() + ":" + softcopy.getVersion());
+                    Console.WriteLine(i + 1 + ") " + books[i].getName() + ":" + books[i].getAuthor() + ":" + books[i].getGenre() + ":" + books[i].getType() + ":" + softcopy.getVersion());
                 }
             }
-            Console.ReadLine();
+            Console.WriteLine();
         }
 
         public static void addBook()
@@ -135,9 +118,7 @@ namespace LibraryManagement
 
             Console.WriteLine("Enter Book Type - hardcopy or softcopy");
             string givenType = Console.ReadLine();
-            //if (givenType.Equals("HardCopy"))
             if (string.Equals(givenType, "hardcopy", StringComparison.OrdinalIgnoreCase))
-
             {
                 Console.WriteLine("Enter Book Name");
                 string givenName = Console.ReadLine();
@@ -153,14 +134,9 @@ namespace LibraryManagement
 
                 Hardcopy book = new Hardcopy(givenName, givenAuthor, givenGenre, givenYear, givenType);
                 externalFile.writeData(book);
-
-
-
             }
-            // else if (givenType.Equals("SoftCopy"))
             else if (string.Equals(givenType, "softcopy", StringComparison.OrdinalIgnoreCase))
             {
-
                 Console.WriteLine("Enter Book Name");
                 string givenName = Console.ReadLine();
 
@@ -175,11 +151,9 @@ namespace LibraryManagement
 
                 Softcopy book = new Softcopy(givenName, givenAuthor, givenGenre, givenVersion, givenType);
 
-
                 externalFile.writeData(book);
+                findAllBooks();
             }
-
-
 
             Console.WriteLine("Book has been Added");
             Console.ReadLine();
@@ -191,18 +165,19 @@ namespace LibraryManagement
             List<Book> books = ExternalFile.getData();
 
             findAllBooks();
-            Console.WriteLine("Please enter a book number");
-            var bookNum = Convert.ToInt32(Console.ReadLine());
-            InputCheck.CheckInteger("Please enter a book number : ", books.Count);
+            var bookNum = InputCheck.CheckInteger("Please enter a book number : ", books.Count);
 
-            Console.WriteLine("Details of the book you choose");
+            Console.WriteLine(Environment.NewLine + "Details of the book you choose");
             Console.WriteLine(books[bookNum - 1].getName() + ":" + books[bookNum - 1].getAuthor() + ":" + books[bookNum - 1].getGenre() + ":" + books[bookNum - 1].getType());
 
-            Console.WriteLine("Enter new Book Author");
+            Console.WriteLine(Environment.NewLine + "Enter new Book Author");
             string editAuthor = Console.ReadLine();
             books[bookNum - 1].setAuthor(editAuthor);
 
             externalFile.writeAllBooks(books);
+            Console.WriteLine();
+            Console.WriteLine("Here is the updated Library");
+            findAllBooks();
         }
 
         public static void deleteBook()
@@ -213,11 +188,11 @@ namespace LibraryManagement
             findAllBooks();
             Console.WriteLine("Please enter a book number");
             var bookNum = Convert.ToInt32(Console.ReadLine());
-            books.RemoveAt(bookNum - 1);
-          
-            Console.WriteLine("Details of the book you choose");
-            Console.WriteLine(books[bookNum - 1].getName() + ":" + books[bookNum - 1].getAuthor() + ":" + books[bookNum - 1].getGenre() + ":" + books[bookNum - 1].getType());
 
+            Console.WriteLine("Details of the book you choose");
+            Console.WriteLine(books[bookNum - 1].getName() + ":" + books[bookNum - 1].getAuthor() + ":" + books[bookNum - 1].getGenre() + ":" + books[bookNum - 1].getType() + Environment.NewLine);
+
+            books.RemoveAt(bookNum - 1);
             externalFile.writeAllBooks(books);
         }
     }
