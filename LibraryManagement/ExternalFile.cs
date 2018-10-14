@@ -46,23 +46,20 @@ namespace LibraryManagement
                 Hardcopy b = (Hardcopy)book;
                 string bookData = b.getName() + ":" + b.getAuthor() + ":" + b.getGenre() + ":" + b.getType() + ":" + b.getYear();
                 File.AppendAllText("BookData.txt", bookData + Environment.NewLine);
-
             }
             else
             {
                 Softcopy b = (Softcopy)book;
                 string bookData = b.getName() + ":" + b.getAuthor() + ":" + b.getGenre() + ":" + b.getType() + ":" + b.getVersion();
                 File.AppendAllText("BookData.txt", bookData + Environment.NewLine);
-
             }
         }
-
 
         public void writeAllBooks(List<Book> books)
         {
             File.WriteAllText("BookData.txt", String.Empty);
             foreach (var book in books)
-                if (book.getType().Equals("HardCopy"))
+                if (book.getType().Equals("HardCopy", StringComparison.OrdinalIgnoreCase))
                 {
                     Hardcopy b = (Hardcopy)book;
                     string bookData = b.getName() + ":" + b.getAuthor() + ":" + b.getGenre() + ":" + b.getType() + ":" + b.getYear();
@@ -73,9 +70,7 @@ namespace LibraryManagement
                     Softcopy b = (Softcopy)book;
                     string bookData = b.getName() + ":" + b.getAuthor() + ":" + b.getGenre() + ":" + b.getType() + ":" + b.getVersion();
                     File.AppendAllText("BookData.txt", bookData + Environment.NewLine);
-
                 }
         }
-
     }
 }
