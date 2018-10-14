@@ -8,7 +8,7 @@ namespace LibraryManagement
         {
 
             Console.WriteLine("Welcome to our Library");
-
+            Book b = new Book();
             string role = InputCheck.checkRole("User/Admin(u/a)?: ");
 
             switch (role)
@@ -30,23 +30,23 @@ namespace LibraryManagement
         public static void user()
         {
             userMenu();
-            int input = InputCheck.CheckInteger("Please select a number", 6);
+            int input = InputCheck.CheckInteger("Please select a number and enter", 6);
             switch (input)
             {
                 case 1:
-                    //    LibraryMethods.findByName();
+                       LibraryMethods.findByName();
                     break;
                 case 2:
-                    //    LibraryMethods.findByAuthor();
+                       LibraryMethods.findByAuthor();
                     break;
                 case 3:
-                    //    LibraryMethods.findByGenre();
+                       LibraryMethods.findByGenre();
                     break;
                 case 4:
-                    //   LibraryMethods.findByType();
+                       LibraryMethods.findByType();
                     break;
                 case 5:
-                    LibraryMethods.FindAllBooks();
+                    LibraryMethods.findAllBooks();
                     break;
                 default:
                     return;
@@ -56,33 +56,34 @@ namespace LibraryManagement
 
         public static void admin()
         {
+            Book b = new Book();
             adminMenu();
-            int input = InputCheck.CheckInteger("Please select a number", 9);
+            int input = InputCheck.CheckInteger("Please select a number and enter", 9);
             switch (input)
             {
                 case 1:
-                    // LibraryMethods.findByName();
+                     LibraryMethods.findByName();
                     break;
                 case 2:
-                    // LibraryMethods.findByAuthor();
+                    LibraryMethods.findByAuthor();
                     break;
                 case 3:
-                    //LibraryMethods.findByGenre();
+                    LibraryMethods.findByGenre();
                     break;
                 case 4:
-                    // LibraryMethods.findByType();
+                     LibraryMethods.findByType();
                     break;
                 case 5:
-                    LibraryMethods.FindAllBooks();
+                    LibraryMethods.findAllBooks();
                     break;
                 case 6:
-                    // LibraryMethods.editBook();
+                    LibraryMethods.editBook();
                     break;
                 case 7:
-                    LibraryMethods.AddBook();
+                    LibraryMethods.addBook();
                     break;
                 case 8:
-                    // LibraryMethods.deleteBook();
+                  // LibraryMethods.deleteBook();
                     break;
                 default:
                     return;
@@ -119,15 +120,6 @@ namespace LibraryManagement
         }
 
 
-
-
-
-
-
-
-
-
-
-
+                                    
     }
 }
