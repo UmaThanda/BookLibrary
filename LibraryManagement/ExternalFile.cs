@@ -40,7 +40,6 @@ namespace LibraryManagement
                     books.Add(b);
                 }
             }
-            }
             books.Sort();
             return books;
         }
