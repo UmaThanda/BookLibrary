@@ -46,14 +46,7 @@ namespace LibraryManagement
                     Console.WriteLine("Books written by " + book.getAuthor() + " " + book.getName() + ":" + book.getAuthor() + ":" + book.getGenre() + ":" + book.getType());
                     break;
                 }
-
-                }
-                
-                
-
-
                 else
-
                 {
                     Console.WriteLine("Sorry.. Look for another author");
                     break;
@@ -200,7 +193,7 @@ namespace LibraryManagement
             findAllBooks();
             Console.WriteLine("Please enter a book number");
             var bookNum = Convert.ToInt32(Console.ReadLine());
-            var bookNum = InputCheck.CheckInteger("Please enter a book number : ", books.Count);
+            InputCheck.CheckInteger("Please enter a book number : ", books.Count);
 
             Console.WriteLine("Details of the book you choose");
             Console.WriteLine(books[bookNum - 1].getName() + ":" + books[bookNum - 1].getAuthor() + ":" + books[bookNum - 1].getGenre() + ":" + books[bookNum - 1].getType());
