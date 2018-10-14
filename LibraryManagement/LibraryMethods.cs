@@ -18,18 +18,18 @@ namespace LibraryManagement
 
             foreach (Book book in books)
             {
-                try
-                {
+                               
                     if (book.getName().Equals(keyword))
                     {
                         Console.WriteLine(book.getName() + ":" + book.getAuthor() + ":" + book.getGenre() + ":" + book.getType());
                         break;
                     }
 
-                }
-                catch (Exception e)
+                
+                else
                 {
                     Console.WriteLine("Sorry.. Try a different keyword");
+                    break;
                 }
             }
         }
@@ -41,19 +41,22 @@ namespace LibraryManagement
             List<Book> books = ExternalFile.getData();
             foreach (Book book in books)
             {
-                try
-                {
                     if (book.getAuthor() == keyword)
                     {
                         Console.WriteLine("Books written by " + book.getAuthor() + " " + book.getName() + ":" + book.getAuthor() + ":" + book.getGenre() + ":" + book.getType());
-
+                        break;
                     }
+
                 }
                 
-       
-                catch
+                
+
+
+                else
+
                 {
                     Console.WriteLine("Sorry.. Look for another author");
+                    break;
                 }
             }
         }
@@ -68,18 +71,17 @@ namespace LibraryManagement
 
             foreach (Book book in books)
             {
-                try
-                {
                     if (book.getGenre().Equals(keyword))
                     {
                         Console.WriteLine(book.getName() + book.getAuthor() + book.getGenre() + book.getType());
+                    break;
                     }
-                }
-                catch (Exception e)
+                
+                else
                 {
                     Console.WriteLine("Sorry.. Look for a different Genre");
+                    break;
                 }
-
             }
         }
 
@@ -88,24 +90,29 @@ namespace LibraryManagement
             Console.WriteLine("Enter Type -  HardCopy or SoftCopy ? ");
             string keyword = Console.ReadLine().ToLower();
             List<Book> books = ExternalFile.getData();
-            Console.WriteLine("here is the list");
-
-            foreach (Book book in books)
+            if (string.Equals(keyword, "hardcopy", StringComparison.OrdinalIgnoreCase) ||
+                (string.Equals(keyword, "softcopy", StringComparison.OrdinalIgnoreCase)))
             {
-                try
+                Console.WriteLine("Here is the list for type - "+ keyword);
+
+                foreach (Book book in books)
                 {
-                    if (book.getType() == keyword)
+                    if (string.Equals(keyword, book.getType(), StringComparison.OrdinalIgnoreCase))
                     {
-                        Console.WriteLine(book.getName() + book.getAuthor() + book.getGenre() + book.getType());
+                        Console.WriteLine(book.getName() + ": " + book.getType());
+                        //break;
                     }
                 }
-                catch (Exception e)
-                {
-                    Console.WriteLine("The type you are looking for is unavailable currently");
 
-                }
             }
-        }
+            else
+            {
+                Console.WriteLine("The type you are looking for is unavailable");
+                //break;
+
+            }
+            }
+        
 
 
         public static void findAllBooks()
@@ -118,7 +125,6 @@ namespace LibraryManagement
 
                 Console.WriteLine(i + 1 + ")." + books[i].getName() + ":" + books[i].getAuthor() + ":" + books[i].getGenre() + ":" + books[i].getType());
             }
-            Console.ReadLine();
         }
 
 
@@ -131,7 +137,9 @@ namespace LibraryManagement
 
             Console.WriteLine("Enter Book Type");
             string givenType = Console.ReadLine();
-            if (givenType.Equals("HardCopy"))
+            //if (givenType.Equals("HardCopy"))
+            if(string.Equals(givenType, "hardcopy", StringComparison.OrdinalIgnoreCase))
+                
             {
                 Console.WriteLine("Enter Book Name");
                 string givenName = Console.ReadLine();
@@ -151,7 +159,8 @@ namespace LibraryManagement
 
 
             }
-            else if (givenType.Equals("SoftCopy"))
+           // else if (givenType.Equals("SoftCopy"))
+          else if (string.Equals(givenType, "softcopy", StringComparison.OrdinalIgnoreCase))
             {
 
                 Console.WriteLine("Enter Book Name");
@@ -178,6 +187,7 @@ namespace LibraryManagement
             Console.ReadLine();
         }
 
+
         public static void editBook()
         {
 
@@ -196,6 +206,9 @@ namespace LibraryManagement
 
             externalFile.writeAllBooks(books);
         }
+
+
+        
 
     }
 }
