@@ -129,7 +129,7 @@ namespace LibraryManagement
 
             var externalFile = new ExternalFile();
 
-            Console.WriteLine("Enter Book Type");
+            Console.WriteLine("Enter Book Type - hardcopy or softcopy");
             string givenType = Console.ReadLine();
             //if (givenType.Equals("HardCopy"))
             if(string.Equals(givenType, "hardcopy", StringComparison.OrdinalIgnoreCase))
