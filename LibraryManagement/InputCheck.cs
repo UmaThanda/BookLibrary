@@ -8,7 +8,7 @@ namespace LibraryManagement
         {
             try
             {
-                Console.WriteLine(option);
+                Console.Write(option);
                 string role = Console.ReadLine().ToLower();
                 if (role.Equals("u") || role.Equals("a"))
                 {
@@ -17,7 +17,7 @@ namespace LibraryManagement
             }
             catch
             {
-                Console.WriteLine("Enter either u or a");
+                Console.Write("Enter either u or a only. ");
             }
             return checkRole(option);
         }
@@ -26,7 +26,7 @@ namespace LibraryManagement
         {
             try
             {
-                Console.WriteLine(option);
+                Console.Write(option);
                 string input = Console.ReadLine();
                 int output = Convert.ToInt32(input);
                 if (output >= 1 && output <= max)
